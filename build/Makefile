@@ -64,7 +64,7 @@ KIND_PROFILE ?= agones
 KIND_CONTAINER_NAME=$(KIND_PROFILE)-control-plane
 
 # Game Server image to use while doing end-to-end tests
-GS_TEST_IMAGE ?= us-docker.pkg.dev/agones-images/examples/simple-game-server:0.32
+GS_TEST_IMAGE ?= us-docker.pkg.dev/agones-images/examples/simple-game-server:0.33
 
 # Enable all beta feature gates. Keep in sync with `true` (beta) entries in pkg/util/runtime/features.go:featureDefaults
 BETA_FEATURE_GATES ?= "CountsAndLists=true&DisableResyncOnSDKServer=true"
@@ -99,6 +99,7 @@ common_mounts = -v $(build_path)/.config/gcloud:/root/.config/gcloud \
 				-v $(build_path)/.gomod:/go/pkg/mod
 
 # Its possible for this to change in the future, so it gets its own variable.
+REGISTRY ?= local
 workdir_path = $(mount_path)
 
 build_version = $(call sha,$(build_path)/build-image/Dockerfile)
